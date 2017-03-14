@@ -12,5 +12,14 @@
 */
 
 Route::get('/', function () {
+	// dd(MyFuncs::full_name());	
     return view('welcome');
 });
+
+// Admin page ,'middleware' => 'auth'
+Route::group(['prefix' => 'admin','namespace'=>'Admin'], function () {
+	Route::resource('/home','HomeController');
+});
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
